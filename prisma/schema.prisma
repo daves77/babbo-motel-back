@@ -23,6 +23,7 @@ model User {
 model Sprite {
   id Int @id @default(autoincrement())
   main String 
+  head String?
   body String
   eyes String
   outfit String

@@ -20,7 +20,6 @@ module.exports  = class UserController extends BaseController {
 
     async createUser(req, res) {
       const {email, password} = req.body
-
         const userExists = await this.model.findUnique({
           where: {
             email
@@ -29,6 +28,7 @@ module.exports  = class UserController extends BaseController {
 
         if (userExists){
           res.status(401).json({error: "User already exists"})
+          return
         }
         const hashedPassword = await getPasswordHash(password)
         const user = await this.model.create({
