@@ -14,10 +14,13 @@ module.exports = class UserController extends BaseController {
 					sprite: true,
 				},
 			});
+      if (!user ){
+        res.status(404).send({error: "User not found"})
+      }
+		res.status(200).send(user);
 		} catch (err) {
 			next(err);
 		}
-		res.status(200).send(user);
 	}
 
 	async createUser(req, res, next) {
