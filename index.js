@@ -25,7 +25,9 @@ const io = socketio(server, {
 
 initSockets(io);
 
-app.use(cors());
+app.use(cors(
+  {origin: FRONTEND_URL}
+));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ limit: '2mb' }));
