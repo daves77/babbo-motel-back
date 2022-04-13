@@ -7,7 +7,7 @@ const socketio = require('socket.io');
 
 const initSockets = require('./sockets');
 const bindRoutes = require('./routers');
-const { init } = require('express/lib/application');
+const middleware = require('./middleware');
 
 dotenv.config();
 const PORT = process.env.PORT || '3004';
@@ -33,6 +33,6 @@ app.use(express.static('public'));
 
 bindRoutes(app);
 
-app.get('/test', (req, res) => res.json({ msg: 'hellowrld1' }));
+app.use(middleware.errorHandler);
 
 server.listen(PORT, () => console.log(`listening @ ${PORT}`));
