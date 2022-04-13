@@ -15,6 +15,10 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 console.log(FRONTEND_URL);
 const app = express();
 
+app.use(cors(
+  {credentials: true}
+));
+
 const server = http.createServer(app);
 const io = socketio(server, {
 	cors: {
@@ -25,9 +29,6 @@ const io = socketio(server, {
 
 initSockets(io);
 
-app.use(cors(
-  {origin: FRONTEND_URL}
-));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ limit: '2mb' }));
