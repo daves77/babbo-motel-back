@@ -12,11 +12,21 @@ const middleware = require('./middleware');
 dotenv.config();
 const PORT = process.env.PORT || '3004';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
-console.log(FRONTEND_URL);
 const app = express();
 
-app.use(cors(
-));
+const whitelist = [FRONTEND_URL]
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1){
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by cors"))
+    }
+  },
+  credentials: true
+}
+
+app.use(cors(corsOptions));
 
 const server = http.createServer(app);
 const io = socketio(server, {
