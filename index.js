@@ -33,6 +33,6 @@ app.use(express.static('public'));
 
 bindRoutes(app);
 
-app.get('/test', (req, res) => res.json({ msg: 'hellowrld' }));
+app.get('/test', (req, res) => res.json({ msg: 'hellowrld1' }));
 
 server.listen(PORT, () => console.log(`listening @ ${PORT}`));
